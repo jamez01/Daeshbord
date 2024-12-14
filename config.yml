@@ -1,0 +1,6 @@
+traefik:
+  url: http://192.168.1.100:8080/
+
+overrides:
+  nextcloud:
+    url: https://nextcloud.org

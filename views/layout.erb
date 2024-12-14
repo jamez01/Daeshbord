@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traefik Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+    .card {
+      background: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      margin: 10px;
+      padding: 20px;
+      min-width: 200px;
+      max-width: 200px !important;
+      text-align: center;
+      flex: 1 0 200px;
+      max-width: 300px;
+    }
+    .card img {
+      width: auto;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+    a {
+      text-decoration: none;
+      color: #1e90ff;
+      font-weight: bold;
+    }
+    a:hover {
+      color: #00bfff;
+      decoration: underline !important;
+    }
+    a:visited {
+      color: #1e90ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>
