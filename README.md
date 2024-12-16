@@ -1,4 +1,5 @@
-# Traefik Home
+# Traefik Dashboard
+[![Ruby](https://github.com/jamez01/traefikDashboard/actions/workflows/ruby.yml/badge.svg)](https://github.com/jamez01/traefikDashboard/actions/workflows/ruby.yml)
 
 A simple app to display a list of all the services running on a Traefik instance as an easy to navigate dashboard.
 
