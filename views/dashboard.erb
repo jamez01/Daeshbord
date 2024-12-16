@@ -1,12 +1,20 @@
 <% if @routers.any? %>
-  <% @routers.each do |router| %>
-    <a href="<%= "#{router.scheme}://#{router.hostnames.first}" %>">
-      <div class="card">
-        <p><img src="<%= get_icon(router.service,router.hostnames.first,router.scheme) %>" alt="<%= router.hostnames.first %>"></img></p>
-        <p><%= router.service %></p>
+  <div class="container">
+    <% @routers.each do |router| %>
+      <div class="card new-card-style">
+        <a href="<%= "#{router.scheme}://#{router.hostnames.first}" %>">
+          <img src="<%= get_icon(router) %>" alt="">
+          <span><%= router.service %></span>
+        </a>
+        <div class="dropdown dropdown-right">
+          <i class="fas fa-ellipsis-v dropdown-icon small-dropdown"></i>
+          <div class="dropdown-content">
+            <a href="/ignore/<%=router.service%>"><i class="fas dropdown-icon fa-ban"></i> Ignore</a>
+          </div>
+        </div>
       </div>
-    </a>
-  <% end %>
+    <% end %>
+  </div>
 <% else %>
   <p>No enabled routers found.</p>
 <% end %>
