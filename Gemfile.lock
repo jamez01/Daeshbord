@@ -67,16 +67,16 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  net-http
-  nokogiri
-  puma (~> 6.5)
-  rackup (~> 2.2)
-  rake
-  rspec
-  sinatra
-  sinatra-contrib
-  sinatra-flash
-  yaml
+  net-http (= 0.6.0)
+  nokogiri (= 1.17.2)
+  puma (= 6.5.0)
+  rackup (= 2.2.1)
+  rake (= 13.2.1)
+  rspec (= 3.13.0)
+  sinatra (= 4.1.1)
+  sinatra-contrib (= 4.1.1)
+  sinatra-flash (= 0.3.0)
+  yaml (= 0.4.0)
 
 BUNDLED WITH
    2.5.23
