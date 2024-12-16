@@ -24,7 +24,6 @@ class TraefikDashboardApp < Sinatra::Base
     'traefik' => [ { 'url' => 'http://localhost:8080' } ],
     'ignore' => [],
     'ignore_insecure' => true
-
   }
   
   CONFIG_FILE = 'config.yml'
@@ -32,12 +31,18 @@ class TraefikDashboardApp < Sinatra::Base
   # Hash to store service logos
   SERVICE_LOGOS = {}
 
+  helpers do
+    def load_config
+      file_config = YAML.load_file(CONFIG_FILE) rescue {}
+      @config = DEFAULT_CONFIG.merge(file_config)
+      @config['traefik'] = [@config['traefik']] if @config['traefik'].is_a?(Hash)
+    end
+  end
+
   # Load configuration
   before do
     content_type :html
-    file_config = YAML.load_file(CONFIG_FILE) rescue {}
-    @config = DEFAULT_CONFIG.merge(file_config)
-    @config['traefik'] = [@config['traefik']] if @config['traefik'].is_a?(Hash)
+    load_config
     session['api_key'] = params['api_key'] if params['api_key'] 
     session.clear if params['logout']
   end

@@ -12,12 +12,16 @@ RSpec.describe 'Traefik Dashboard App' do
 
   before(:each) do
     allow(YAML).to receive(:load_file).and_return({
-      'traefik' => { 'url' => 'http://localhost:8080', 'username' => 'user', 'password' => 'pass' },
-      'ignore' => []
+      'traefik' => [{ 'url' => 'http://localhost:8080', 
+                      'username' => 'user', 
+                      'password' => 'pass',
+                   }],
+                   'ignore_insecure' => true,
     })
+
     allow(Router).to receive(:all).and_return([
-      Router.new('service' => 'router1', 'name' => 'router1', 'status' => 'enabled', 'tls' => {}, 'rule' => 'Host(`example.com`)'),
-      Router.new('service' => 'router2', 'name' => 'router2', 'status' => 'disabled', 'tls' => nil, 'rule' => 'Host(`example.org`)')
+      Router.new({'service' => 'router1', 'name' => 'router1', 'status' => 'enabled', 'tls' => {}, 'rule' => 'Host(`example.com`)'}),
+      Router.new({'service' => 'router2', 'name' => 'router2', 'status' => 'disabled', 'tls' => nil, 'rule' => 'Host(`example.org`)'})
     ])
   end
 
@@ -34,14 +38,15 @@ RSpec.describe 'Traefik Dashboard App' do
 
     describe '#fetch_routers' do
       it 'fetches and filters routers' do
+        app_instance.load_config
         routers = app_instance.fetch_routers
-        expect(routers.map(&:name)).to eq(['router1'])
+        expect(routers.map(&:service)).to eq(['router1'])
       end
     end
 
     describe '#get_icon' do
       it 'returns a default icon if no icon is found' do
-        icon_url = app_instance.get_icon('service', 'example.com', 'https')
+        icon_url = app_instance.get_icon(Router.all.first)
         expect(icon_url).to include('fakeimg.pl')
       end
     end
