@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     base64 (0.2.0)
+    diff-lcs (1.5.1)
     logger (1.6.3)
     mini_portile2 (2.8.8)
     multi_json (1.15.0)
@@ -27,6 +28,20 @@ GEM
       rack (>= 3.0.0)
     rackup (2.2.1)
       rack (>= 3)
+    rake (13.2.1)
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.2)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.2)
     ruby2_keywords (0.0.5)
     sinatra (4.1.1)
       logger (>= 1.6.0)
@@ -56,6 +71,8 @@ DEPENDENCIES
   nokogiri
   puma (~> 6.5)
   rackup (~> 2.2)
+  rake
+  rspec
   sinatra
   sinatra-contrib
   sinatra-flash
