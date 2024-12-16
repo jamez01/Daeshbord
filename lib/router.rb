@@ -7,17 +7,17 @@ class Router
   @@api_user = false
   @@api_pass = false
   def self.api_url=(url)
-    @@api_url = url.chomp('/')
+    @@api_url = url&.chomp('/') 
   end
 
   def self.find(name)
-    response = Net::HTTP.get(URI("#{Router.auth}#{@@api_url}#{SINGLE_ROUTE_PATH}#{name}"))
+    response = api_get("#{SINGLE_ROUTE_PATH}#{name}")
     router = JSON.parse(response) rescue {}
     Router.new(router)
   end
 
   def self.all
-    response = Net::HTTP.get(URI("#{Router.auth}#{@@api_url}#{ROUTE_PATH}"))
+    response = api_get(ROUTE_PATH)
     JSON.parse(response).map {|router| Router.new(router)}
   end
 
@@ -60,6 +60,17 @@ class Router
   def hostnames
     hosts = @rule.match(/Host\(`([^`]+)`\)/i)
     hosts.nil? ? [] : hosts[1..-1]
+  end
+
+  private
+
+  def self.api_get(path)
+    puts "Fetching #{path}..."
+    uri = URI("#{auth}#{@@api_url}#{path}")
+    Net::HTTP.start(uri.host, uri.port, read_timeout: 5) do |http|
+      request = Net::HTTP::Get.new(uri)
+      http.request(request).body
+    end
   end
 
 end

@@ -1,7 +1,11 @@
-## This is an example. Make sure to replace your traefik url
+---
 traefik:
-  url: http://192.168.1.100:8080/
-
+- url: http://192.168.1.100:8080/
+ignore:
+- app
+- heimdall
+ignore_insecure: true
 overrides:
   nextcloud:
     url: https://nextcloud.org
+:ignore: 
