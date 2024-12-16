@@ -63,10 +63,7 @@ class TraefikDashboardApp < Sinatra::Base
 
   get '/edit/:service' do |service|
     auth!
-    Mutex.new.synchronize do
-      File.open(CONFIG_FILE, 'w') { |file| file.write(@config.to_yaml) }
-    end
-    flash[:success] = "Service #{service} unignored"
+    # TODO
     redirect '/'
   end
 end
