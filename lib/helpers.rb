@@ -57,7 +57,7 @@ class TraefikDashboardApp
         break if redirect_count >= redirect_limit
       end
 
-      return "https://fakeimg.pl/100x100/575757/54e3ff?text=#{service}" unless response.is_a?(Net::HTTPOK)
+      return nil unless response.is_a?(Net::HTTPOK)
 
       doc = Nokogiri::HTML(response.body)
       icon_urls = doc.css('link[rel~="icon"], link[rel~="shortcut icon"], link[rel~="apple-touch-icon"]').map { |link| link['href'] }
@@ -67,7 +67,7 @@ class TraefikDashboardApp
         response = Net::HTTP.get_response(URI(icon_url))
         return icon_url if response.is_a?(Net::HTTPOK) && response.content_type.start_with?('image/')
       end
-      "https://fakeimg.pl/100x100/575757/54e3ff?text=#{service}"
+      nil
     end
 
 

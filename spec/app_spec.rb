@@ -45,9 +45,9 @@ RSpec.describe 'Traefik Dashboard App' do
     end
 
     describe '#get_icon' do
-      it 'returns a default icon if no icon is found' do
+      it 'returns a nil if no icon is found' do
         icon_url = app_instance.get_icon(Router.all.first)
-        expect(icon_url).to include('fakeimg.pl')
+        expect(icon_url).to eql(nil)
       end
     end
   end

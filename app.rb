@@ -39,6 +39,7 @@ class TraefikDashboardApp < Sinatra::Base
     end
   end
 
+  
   # Load configuration
   before do
     content_type :html
