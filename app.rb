@@ -54,14 +54,6 @@ class TraefikDashboardApp < Sinatra::Base
     erb :dashboard
   end
 
-  get '/icon/:service' do |service|
-
-    router = fetch_routers.select { |r| r.service == service }.first
-    icon = get_icon(router)
-    redirect icon if icon
-    status 404
-  end
-
   get '/ignore/:service' do |service|
     auth!
     @config['ignore'] << service
