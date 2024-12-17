@@ -39,6 +39,7 @@ class TraefikDashboardApp < Sinatra::Base
     end
   end
 
+  
   # Load configuration
   before do
     content_type :html
@@ -51,6 +52,14 @@ class TraefikDashboardApp < Sinatra::Base
   get '/' do
     @routers = fetch_routers
     erb :dashboard
+  end
+
+  get '/icon/:service' do |service|
+
+    router = fetch_routers.select { |r| r.service == service }.first
+    icon = get_icon(router)
+    redirect icon if icon
+    status 404
   end
 
   get '/ignore/:service' do |service|

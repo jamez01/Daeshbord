@@ -5,12 +5,7 @@ body {
   background-color: #121212;
   color: #e0e0e0;
 }
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
-  justify-content: center;
-}
+
 .flash {
   position: absolute;
   top: 10px;
@@ -45,6 +40,31 @@ body {
 .flash.fade-out {
   opacity: 0;
 }
+
+@media (min-width: 601px) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0;
+    margin: 0px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    padding: 0px !important;
+    margin: 5px 0px 5px 0px!important;
+  }
+}
 .card {
   background-color: #1e1e1e;
   border-radius: 10px;
@@ -70,6 +90,26 @@ body {
 }
 
 
+.card .holder i {
+  color: #fff !important;
+}
+
+.card .holder {
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  right: 10px;
+  margin-left: 10px;
+  font-size: calc(20px + 1vw); /* Adjust font size based on viewport width */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Ensure text does not overflow */
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
+
 .card img {
   width: 50px;
   height: 50px;
@@ -90,6 +130,10 @@ body {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  right: 100%; /* Position the dropdown to the left of the button */
+  top: 0; /* Align the top of the dropdown with the button */
+  margin-right: 10px; /* Add some space between the button and the dropdown */
+  /* transform: translateX(-100%); Ensure the entire dropdown is to the left */
 }
 .dropdown-content a {
   color: white;
@@ -111,3 +155,4 @@ body {
   top: 0px;
   right: 0px;
 }
+
