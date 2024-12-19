@@ -10,15 +10,16 @@ class TraefikDashboardApp
     end
     # Fetch data from the Traefik API
     def fetch_routers
+      puts settings.config.inspect
       routers = []
-      @config['traefik']&.each do |traefik|
+      settings.config['traefik']&.each do |traefik|
         Router.api_url = traefik['url']
         Router.user = traefik['usr']
         Router.password = traefik['password']
         routers << Router.all.reject {|router| 
-          @config['ignore'].include?(router.service) || 
+          settings.config['ignore'].include?(router.service) || 
           !router.enabled? || 
-          (!router.ssl? && @config['ignore_insecure'] ) || 
+          (!router.ssl? && settings.config['ignore_insecure'] ) || 
           router.hostnames.empty? || 
           router.hostnames.first.nil?
         }
@@ -72,9 +73,9 @@ class TraefikDashboardApp
 
 
     def update_config(new_config)
-      @config.merge!(new_config)
+      settings.config.merge!(new_config)
       Mutex.new.synchronize do
-        File.open(CONFIG_FILE, 'w') { |file| file.write(@config.to_yaml) }
+        File.open(settings.config_file, 'w') { |file| file.write(settings.config.to_yaml) }
       end
     end
   end

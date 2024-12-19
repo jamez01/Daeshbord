@@ -1,25 +1,38 @@
 <% if @routers.any? %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1 p-2">
     <% @routers.each do |router| %>
-      <div class="card">
-        <a href="<%= "#{router.scheme}://#{router.hostnames.first}" %>">
-        <% if get_icon(router) %>
-          <img src="<%= get_icon(router) %>" alt="">
+      <div class="col">
+        <div class="d-flex align-items-center service text-light p-3 rounded">
+            <a class="slink" href="<%= "#{router.scheme}://#{router.hostnames.first}" %>">
+          <% if get_icon(router) %>
+            <img src="<%= get_icon(router) %>" class="me-3" alt="" style="width: 50px; height: 50px;">
           <% else %>
-          <div class="holder" data-service="<%= router.service %>">
-            <i class="fas fa-<%= router.service[0] %>"></i>
-          </div>
+            <div class="holder me-3" data-service="<%= router.service %>" style="width: 50px; height: 50px;">
+              <i class="fas fa-<%= router.service[0] %>"></i>
+            </div>
           <% end %>
-          <span class="serviceName"><%= router.service %></span>
+          </a>
+          <a class="slink flex-grow-1" href="<%= "#{router.scheme}://#{router.hostnames.first}" %>">
+              <span class="fs-5"><%= router.service %></span>
+          </a>
 
-        </a>
-        <div class="dropdown dropdown-right">
-          <i class="fas fa-ellipsis-v dropdown-icon small-dropdown"></i>
-          <div class="dropdown-content">
-            <a href="/ignore/<%=router.service%>"><i class="fas dropdown-icon fa-ban"></i> Ignore</a>
+          <div class="popover bs-popover-start">
+            <button class="btn btn-secondary" type="button" data-bs-toggle="popover" data-bs-placement="left" data-bs-html="true" data-bs-content="<a class='dropdown-item' href='/ignore/<%=router.service%>'><i class='fas fa-ban'></i> Ignore</a><a class='dropdown-item' href='/ignore/<%=router.service%>'><i class='fas fa-pencil-alt'></i> Edit</a>">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
           </div>
         </div>
       </div>
     <% end %>
+  </div>
 <% else %>
   <p>No enabled routers found.</p>
 <% end %>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+  });
+</script>

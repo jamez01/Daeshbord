@@ -6,7 +6,7 @@ gem 'sinatra-flash', '~> 0.3'
 gem 'nokogiri', '~> 1.17.0'
 gem 'yaml', '~> 0.4'
 gem 'net-http', '~> 0.6'
-
+gem 'bcrypt', '~> 3.1', '>= 3.1.20'
 gem 'rackup', '~> 2.2'
 gem 'puma', '~> 6.5'
 

@@ -1,11 +1,18 @@
 version: '3.8'
 
 services:
-  traefik_dashboard:
-    build: .
+  daeshbord:
+    build: jamez001/daeshbord
     ports:
-      - "9292:9292"
+      - "9292:9292" # Optional, remove if behind traefik or other proxy on docker network
     environment:
+      - APP_HOME=/app
       - CONFIG_FILE=/app/config.yml
-      - TRAEFIK_DASH_API_KEY=${TRAEFIK_DASH_API_KEY}
+    volumes:
+      - ./config.yml:/app/config.yml
+    networks:
+      - daeshbord
 
+networks:
+  daeshbord:
+    driver: bridge

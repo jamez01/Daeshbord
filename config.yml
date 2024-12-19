@@ -4,8 +4,13 @@ traefik:
 ignore:
 - app
 - heimdall
+- headscale
 ignore_insecure: true
 overrides:
   nextcloud:
     url: https://nextcloud.org
-:ignore: 
+:ignore:
+- app
+- heimdall
+- headscale
+- headscaleadmin
